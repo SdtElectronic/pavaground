@@ -1,0 +1,181 @@
+﻿@font-face {
+  font-family:"japarifont";
+  src:url('../resources/japarifont.woff');
+}
+body{
+	margin:0;
+
+}
+p{
+	font-family:"japarifont";
+	padding: 10px 0px 0px 12px;
+	margin: 0px;
+}
+#container{
+	position: absolute;
+	top:0;
+	left: 0;
+	margin: 0px;
+	height:100vh;
+	width:100vw;
+	z-index: -99;
+	overflow: auto;
+}
+#sidebar{
+	display:flex;
+	justify-content:center;
+	flex-direction:column;
+	background-color: rgba(255,255,255,0.8);
+	box-shadow:  0px 0px 0.5px 0.5px #88bbcc , 0px 0px 2px 2px #fff inset;
+	margin: 0px;
+	color: #224466;
+	font-size: 27px;
+	font-weight: 300px;
+	box-sizing: border-box;
+	float:left;
+	height:99vh;
+	border-right: 5px;
+	border-top: 5px;
+	border-bottom: 5px;
+	border-left: 0px;
+	border-style: solid;
+	border-color: #88bbcc;
+	border-radius: 0px 15px 15px 0px;
+	z-index: 1;
+	transition: all 1s;
+	overflow: hidden;
+	position: relative;
+	top:0.5vh;
+}
+#bartoggle{
+	z-index: 100;
+	box-shadow:  0px 0px 6px 6px #fff;
+	background-color: #fff;
+	height:10vh;
+	line-height: 12vh;
+	width: 30px;
+	margin-left: 2px;
+	border-style:none;
+	border-radius: 0px 6px 6px 0px;
+	float: left;
+	position: relative;
+	top:44vh;
+	vertical-align:middle;
+	text-align:center;
+	cursor:pointer;
+}
+#bartoggle:hover{
+	cursor: pointer;
+}
+#barut{
+	display: inline-block;
+	width:24px;
+}
+#settings{
+	position: fixed;
+	top:20px;
+	right:20px;
+	padding: 10px;
+	background-color: rgba(194,219,231,0.6);
+	border-style: solid;
+	border-color: #88bbcc;
+	border-radius: 40px;
+	box-shadow:  0px 0px 3px 3px #88bbcc , 0px 0px 6px 6px #fff inset;
+	height: 40px;
+	width: 40px;
+	display: flex;
+    justify-content: center;
+    align-items: center;
+}
+#settings:hover{
+	cursor: pointer;
+	box-shadow:  0px 0px 6px 6px #fff , 0px 0px 9px 9px #fff inset;
+}
+#settings:active{
+	cursor: pointer;
+	box-shadow:  0px 0px 3px 3px #88bbcc , 0px 0px 6px 6px #fff inset;
+	background-color: rgba(194,219,231,0.2);
+}
+#setbtn{
+	height: 30px;
+	width: auto;
+}
+.FriendsPic{
+	width:auto;
+	height: 24vh;
+	display: block;
+	margin:auto;
+	padding: 8px;
+}
+.AreasPic{
+	width:auto;
+	height: 21vh;
+	display: block;
+	margin:auto;
+	padding: 8px;
+	background-color: #aaa;
+}
+.ToysPic{
+	width:auto;
+  max-width: 180px;
+	height: 21vh;
+	display: block;
+	margin:auto;
+	padding: 24px 0px 24px 0px;
+}
+.AreasPic:before {
+    content:'';
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    box-shadow:  0 0 40px #aaa inset;
+ }
+.anfriends{
+	width:18vw;
+	height:auto;
+}
+.opt{
+	-webkit-text-fill-color:#fff;
+	-webkit-text-stroke:2px #224466;
+	flex-shrink:0;
+	margin-top:10px;
+	height:32vh;
+	/*background-color: rgba(255,255,255,0.5);*/
+	width:250px;
+	transition: all 1s;
+	overflow: hidden;
+}
+.opt:hover{
+	height:96vh;
+	overflow: auto;
+}
+#toys{
+ top:0;
+ bottom: 0;
+}
+#area{
+	position: absolute;
+	z-index: -100;
+	top: 0;
+	left: 0;
+	width: 100% ;
+	height: auto;
+	display: inline-block;
+}
+
+::-webkit-scrollbar {/*滚动条整体样式*/
+        width: 10px;     /*高宽分别对应横竖滚动条的尺寸*/
+        height: 1px;
+    }
+::-webkit-scrollbar-thumb {/*滚动条里面小方块*/
+        border-radius: 10px;
+         -webkit-box-shadow: inset 0 0 5px rgba(0,0,0,0.2);
+        background: #535353;
+    }
+::-webkit-scrollbar-track {/*滚动条里面轨道*/
+        -webkit-box-shadow: inset 0 0 5px rgba(0,0,0,0.2);
+        border-radius: 10px;
+        background: #EDEDED;
+    }
