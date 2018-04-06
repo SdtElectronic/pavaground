@@ -4,23 +4,45 @@
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 </head>
 <body>
-	<div id = "sidebar" style = "width:256px;">
-			<div class = "opt" id ="friends">
-				<p>Friends</p>
+	<div id = "sidecont">
+		<div id = "sidebar" style = "width:256px;">
+			<div class = "opt" id ="friendsCont">
+				<div class = "headBar" id = "friendsHead">
+					<p>Friends</p>
+					<img class = "Vt" id = "friendsMV" src = "resources/multiV.svg"></img>
+					<img class = "Vt" id = "friendsSV" src = "resources/singleV.svg" style = "background-color:rgba(34,68,102,0.4);border-radius:4px;"></img>
+				</div>
+				<div id = "friends" class = "optc">
+				</div>
 			</div>
-			<div class = "opt" id ="toys">
-				<p>道具</p>
+			<div class = "opt" id ="toysCont">
+				<div class = "headBar" id = "toysHead">
+					<p>道具</p>
+					<img class = "Vt" id = "toysMV" src = "resources/multiV.svg"></img>
+					<img class = "Vt" id = "toysSV" src = "resources/singleV.svg" style = "background-color:rgba(34,68,102,0.4);border-radius:4px;"></img>
+				</div>
+				<div id = "toys" class = "optc">
+				</div>
 			</div>
-			<div class = "opt" id ="bkgr">
-				<p>地区</p>
-				<img class = "AreasPic" src = "https://japari-cn.com/pavilion/sucai/BG.png"></img>
+			<div class = "opt" id ="bkgrCont">
+				<div class = "headBar" id = "bkgrHead">
+					<p>地区</p>
+					<img class = "Vt" id = "bkgrMV" src = "resources/multiV.svg"></img>
+					<img class = "Vt" id = "bkgrSV" src = "resources/singleV.svg" style = "background-color:rgba(34,68,102,0.4);border-radius:4px;"></img>
+				</div>
+				<div id = "bkgr" class = "optc">
+					<img class = "AreasPic" src = "https://japari-cn.com/pavilion/sucai/BG.png"></img>
+				</div>
 			</div>
 		</div>
 		<div id = "bartoggle" onclick='sidetoggle()'>
 			<img id = "barut" src = "resources/barut.svg"></img>
 		</div>
+	</div>
 	<div id = "container">
-		<img id = "area" src = "https://japari-cn.com/pavilion/sucai/BG.png"></img>
+		<div id = "view">
+			<img id = "area" src = "https://japari-cn.com/pavilion/sucai/BG.png" draggable="false"></img>
+		</div>
 	</div>
 	<div id = "setbar">
 		<div id = settings>

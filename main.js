@@ -2,15 +2,26 @@ var Friends = [];
 var Toys = [];
 var Bkgr = [];
 var friendscnt = 0,
-		toycnt = 0;
+	toycnt = 0;
 var isStrict = false;
 var Esidebar = document.getElementById("sidebar"),
-		Efriends = document.getElementById("friends"),
-		Etoys = document.getElementById("toys"),
-		Ebkgr = document.getElementById("bkgr"),
-		Econt = document.getElementById("container");
+	Escont = document.getElementById("sidecont"),
+	Efriends = document.getElementById("friends"),
+	EfriendsC = document.getElementById("friendsCont")
+	Etoys = document.getElementById("toys"),
+	EtoysC = document.getElementById("toysCont")
+	Ebkgr = document.getElementById("bkgr"),
+	EbkgrC = document.getElementById("bkgrCont"),
+	Econt = document.getElementById("container");
+function scaleCont(){
+	Econt.style.transform = "scale(" + calcScale() + ")";
+}
+scaleCont();
 
-function calcSize(name){
+window.onresize = function(){scaleCont();};
+//document.documentElement.watch("clientHeight",scaleCont());
+
+/*function calcSize(name){
 	if(name < 100){
 		var img = new Image();
 		img.src = "chr/" + name + ".png";
@@ -20,25 +31,37 @@ function calcSize(name){
 	}else{
 		//TODO:HANDLE TOYS
 	}
-}
-
-function calcToySize(){
-
-}
+}*/
 
 
 
-function getFriends(){
+
+function getFriendsS(){
+	Efriends.innerHTML = "";
 	for(let i = 1;i != 46;i++){
 		Efriends.innerHTML += '<img src = "chr/' + i + '.png" name ="'+i+'" class = "FriendsPic"></img>';
 	}
-}getFriends();
-function getToys(){
+}getFriendsS();
+function getFriendsM(){
+	Efriends.innerHTML = "";
+	for(let i = 1;i != 46;i++){
+		Efriends.innerHTML += '<img src = "chr/' + i + '.png" name ="'+i+'" class = "FriendsPicM"></img>';
+	}
+}
+function getToysS(){
+	Etoys.innerHTML = "";
 	for(let i = 1;i != 153;i++){
 		Etoys.innerHTML += '<img src = "toys/' + i + '.png" name ="'+(i+100)+'" class = "ToysPic"></img>';
 	}
-}getToys();
+}getToysS();
+function getToysM(){
+	Etoys.innerHTML = "";
+	for(let i = 1;i != 153;i++){
+		Etoys.innerHTML += '<img src = "toys/' + i + '.png" name ="'+(i+100)+'" class = "ToysPicM"></img>';
+	}
+}
 function getAreas(){
+	Ebkgr.innerHTML = "";
 	for(let i = 1;i != 3;i++){
 		Ebkgr.innerHTML += '<img src = "bkgr/' + i + '.png" name ="'+(i+1000)+'" class = "AreasPic"></img>';
 	}
@@ -54,7 +77,8 @@ $(".FriendsPic",
 				img.class = this.class;
 				Efriends.insertBefore(img, this);*/
 			}else{
-
+				//Esidebar.removeChild(this);
+				//Friends
 			}
 			e.dataTransfer.setData("text",this.name);
 		}
@@ -64,8 +88,8 @@ $(".FriendsPic",
 			var pos = anCusor(Econt);
 			if(pos[0] - size[0]/2 <= 0 || pos[1] - size[1]/2 <= 0 || pos[0] + size[0] >= Econt.width || pos[1] + size[1] >= Econt.height){
 				console.log("overflow");
-			
-								
+
+
 			}
 		}*/
 	}
@@ -75,71 +99,113 @@ Econt.ondragover = function(e){
 	e.preventDefault();
 }
 Econt.onclick = function(e){
-	console.log(anCusor(Econt)[1]);
-	console.log(window.getComputedStyle(Econt,null).height.split('p')[0]);
+	console.log(e.offSetX);
+	console.log(e.offsetY);
 }
 
 Econt.ondrop = function(e){
 	var name = e.dataTransfer.getData("text");
-	var size = calcSize(name);
-	var pos = anCusor(Econt);
-	if(!(pos[0] - size[0]/2 <= 0 || pos[1] - size[1]/2 <= 0 || pos[0] + size[0]/2 >= window.getComputedStyle(Econt,null).width.split('p')[0] || pos[1] + size[1]/2 >= window.getComputedStyle(Econt,null).height.split('p')[0])){
-		function setImage(){
-			img.name = name;
-			img.id = Friends.length;
-			Friends.push(name);
-			img.style.position = "absolute";
-			img.className = 'anfriends';
-			img.style.top = anCusor(Econt)[1] - size[1]/2  + 'px';
-			img.style.left = anCusor(Econt)[0] - size[0]/2 + 'px';
-			//img.style.top = anCusor(Econt)[1] + 'px';
-			//img.style.left = anCusor(Econt)[0] + 'px';
-
-			
-		}
-		if(name > 100){
-			var img = new Image();
-			img.src = "toys/" + (name - 100) + ".png";
-			setImage();
+	var pos = [anCusor(e)[0],anCusor(e)[1]];
+	if(name > 100){
+		var img = new Image();
+		img.src = "toys/" + (name - 100) + ".png";
+		if(!isOverflow(e,img)){
+			img.name = name - 100;
+			img.id = toycnt ++;
+			img.className = 'antoy';
+			img.style.top = pos[1] - img.height/2  + 'px';
+			img.style.left = pos[0] - img.width/2 + 'px';
 			Econt.appendChild(img);
-		}else{
-			var img = new Image();
-			img.src = "chr/" + name + ".png";
-			setImage();
+		}
+	}else{
+		var img = new Image();
+		img.src = "chr/" + name + ".png";
+		if(!isOverflow(e,img)){
+			img.name = name;
+			img.id = friendscnt ++;
+			img.className = 'anfriends';
+			img.style.top = pos[1] - img.height/2  + 'px';
+			img.style.left = pos[0] - img.width/2 + 'px';
 			Econt.appendChild(img);
 		}
 	}
 }
-
-
-
-
-
-
 
 
 //Please don't edit the code below unless you understand what you are doing.
+/*Object.defineProperty(document.documentElement,'clientWidth',get: function(){},set: function(value) {
+    zhihu = value;
+    console.log('set:' + zhihu);
+
+  }
+});*/
+
+/*var Cargs = {CHeight : document.documentElement.clientHeight,
+				 CWidth : document.documentElement.clientWidth
+			 };
+
+Object.defineProperty(Cargs,'CWidth', {
+  get: function() {
+  },
+  set: function(value) {
+    console.log('set:' + value);
+  }
+});*/
+var friSV  = document.getElementById("friendsSV");
+var toySV  = document.getElementById("toysSV");
+var bkgSV  = document.getElementById("bkgrSV");
+var friMV  = document.getElementById("friendsMV");
+var bkgMV  = document.getElementById("bkgrMV");
+var toyMV  = document.getElementById("toysMV");
+
+friSV.onclick = function(){
+	this.style.backgroundColor = "rgba(34,68,102,0.4)";
+	this.style.borderRadius = "4px";
+	this.style.padding = "1px";
+	friMV.style.backgroundColor = "";
+	friMV.style.borderRadius = "";
+	getFriendsS();
+}
+friMV.onclick = function(){
+	this.style.backgroundColor = "rgba(34,68,102,0.4)";
+	this.style.borderRadius = "4px";
+	this.style.padding = "1px";
+	friSV.style.backgroundColor = "";
+	friSV.style.borderRadius = "";
+	getFriendsM();
+}
+toySV.onclick = function(){
+	this.style.backgroundColor = "rgba(34,68,102,0.4)";
+	this.style.borderRadius = "4px";
+	this.style.padding = "1px";
+	toyMV.style.backgroundColor = "";
+	toyMV.style.borderRadius = "";
+	getToysS();
+}
+toyMV.onclick = function(){
+	this.style.backgroundColor = "rgba(34,68,102,0.4)";
+	this.style.borderRadius = "4px";
+	this.style.padding = "1px";
+	toySV.style.backgroundColor = "";
+	toySV.style.borderRadius = "";
+	getToysM();
+}
+
 
 
 function sidetoggle(){
-	if(Esidebar.style.width == '256px'){
-		Esidebar.style.width = 0;
-		Efriends.style.transform = 'translateX(-256px)';
-		Etoys.style.transform = 'translateX(-256px)';
-		Ebkgr.style.transform = 'translateX(-256px)';
+	if(Escont.style.transform != 'translateX(-256px)'){
+		Escont.style.transform = 'translateX(-256px)';
 	}else{
-		Esidebar.style.width = '256px';
-		Efriends.style.transform = 'translateX(0px)';
-		Etoys.style.transform = 'translateX(0px)';
-		Ebkgr.style.transform = 'translateX(0px)';
+		Escont.style.transform = 'translateX(0px)';
 	}
 
 }
-Efriends.onmouseover=function(){Esidebar.style.setProperty('justify-content', 'flex-start', 'important');}
-Efriends.onmouseleave = function(){Esidebar.style.setProperty('justify-content', 'center', 'important');Efriends.scrollTo(0,0);}
-Etoys.onmouseleave = function(){Etoys.scrollTo(0,0);}
-Ebkgr.onmouseover=function(){Esidebar.style.setProperty('justify-content', 'flex-end', 'important');}
-Ebkgr.onmouseleave = function(){Esidebar.style.setProperty('justify-content', 'center', 'important');Ebkgr.scrollTo(0,0);}
+EfriendsC.onmouseover=function(){Esidebar.style.setProperty('justify-content', 'flex-start', 'important');}
+EfriendsC.onmouseleave = function(){Esidebar.style.setProperty('justify-content', 'center', 'important');Efriends.scrollTo(0,0);}
+EtoysC.onmouseleave = function(){Etoys.scrollTo(0,0);}
+EbkgrC.onmouseover=function(){Esidebar.style.setProperty('justify-content', 'flex-end', 'important');}
+EbkgrC.onmouseleave = function(){Esidebar.style.setProperty('justify-content', 'center', 'important');Ebkgr.scrollTo(0,0);}
 
 
 function $(name,func){
@@ -152,8 +218,8 @@ function $(name,func){
 	return;
 }
 
-function anCusor(obj){
- var ParentObj=obj;
+function anCusor(ev){
+ /*var ParentObj=obj;
  var left = obj.offsetLeft;
  var top = obj.offsetTop;
  while(ParentObj = ParentObj.offsetParent){
@@ -161,11 +227,28 @@ function anCusor(obj){
   top += (ParentObj.offsetTop );
  }
  var x = event.clientX-left+document.body.scrollLeft  - 2 + obj.scrollLeft;
- var y = event.clientY-top+document.body.scrollTop - 2 + obj.scrollTop;
- return [x,y];
+ var y = event.clientY-top+document.body.scrollTop - 2 + obj.scrollTop;*/
+ return [ev.offsetX,ev.offsetY];
 }
 
+function calcScale(){
+  var w = document.documentElement.clientWidth;
+  var h = document.documentElement.clientHeight;
+  var hh = window.getComputedStyle(Econt,null).height.split('p')[0];
+  var ww = window.getComputedStyle(Econt,null).width.split('p')[0];
+  return (h/hh > w/ww)?(h/hh):(w/ww);
+}
 
+function isOverflow(ev,Cobj){
+	var size = [Cobj.width,Cobj.height];
+	var pos = [anCusor(ev)[0],anCusor(ev)[1]];
+	if(pos[0] - size[0]/2 <= 0 || pos[1] - size[1]/2 <= 0 || pos[0] + size[0]/2 >= window.getComputedStyle(ev.target,null).width.split('p')[0] || pos[1] + size[1]/2 >= window.getComputedStyle(ev.target,null).height.split('p')[0]){
+		return true;
+		console.log(pos[0]);
+	}else{
+		return false;
+	}
+}
 
 /*function sidetoggle(objname){
 	var obj = document.getElementById(objname);

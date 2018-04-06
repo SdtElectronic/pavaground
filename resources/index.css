@@ -4,22 +4,30 @@
 }
 body{
 	margin:0;
-
+  z-index: -1000;
 }
 p{
 	font-family:"japarifont";
-	padding: 10px 0px 0px 12px;
 	margin: 0px;
+	position:absolute;
+	top:0;
+	left:0;
+	padding:6px 10px 3px 10px;
 }
 #container{
 	position: absolute;
 	top:0;
 	left: 0;
 	margin: 0px;
-	height:100vh;
-	width:100vw;
 	z-index: -99;
-	overflow: auto;
+	height:auto;
+	width: auto;
+	transform-origin:left top;
+}
+#sidecont{
+	position:fixed;
+	top:0px;
+	transition: all 1s;
 }
 #sidebar{
 	display:flex;
@@ -29,7 +37,6 @@ p{
 	box-shadow:  0px 0px 0.5px 0.5px #88bbcc , 0px 0px 2px 2px #fff inset;
 	margin: 0px;
 	color: #224466;
-	font-size: 27px;
 	font-weight: 300px;
 	box-sizing: border-box;
 	float:left;
@@ -106,6 +113,15 @@ p{
 	display: block;
 	margin:auto;
 	padding: 8px;
+  cursor:pointer;
+}
+.FriendsPicM{
+	width:auto;
+	height: 8vh;
+	display: inline-block;
+	margin:auto;
+	padding: 4px;
+  cursor:pointer;
 }
 .AreasPic{
 	width:auto;
@@ -114,6 +130,8 @@ p{
 	margin:auto;
 	padding: 8px;
 	background-color: #aaa;
+  	border-radius: 3px;
+  	cursor:pointer;
 }
 .ToysPic{
 	width:auto;
@@ -122,6 +140,16 @@ p{
 	display: block;
 	margin:auto;
 	padding: 24px 0px 24px 0px;
+  cursor:pointer;
+}
+.ToysPicM{
+	width:auto;
+  	max-width: 180px;
+	height: 6vh;
+	display: block;
+	margin:auto;
+	padding: 6px 0px 24px 0px;
+  	cursor:pointer;
 }
 .AreasPic:before {
     content:'';
@@ -133,36 +161,56 @@ p{
     box-shadow:  0 0 40px #aaa inset;
  }
 .anfriends{
-	width:18vw;
 	height:auto;
+	position:absolute;
 }
 .opt{
+	position: relative;
 	-webkit-text-fill-color:#fff;
 	-webkit-text-stroke:2px #224466;
 	flex-shrink:0;
 	margin-top:10px;
-	height:32vh;
+
 	/*background-color: rgba(255,255,255,0.5);*/
 	width:250px;
 	transition: all 1s;
-	overflow: hidden;
 }
-.opt:hover{
-	height:96vh;
-	overflow: auto;
+.headBar{
+	height:30px;
+	width: 250px;
+	margin: 0px;
+	font-size: 27px;
+  display:table-cell;
+  vertical-align:middle;
 }
-#toys{
- top:0;
- bottom: 0;
-}
-#area{
-	position: absolute;
-	z-index: -100;
-	top: 0;
-	left: 0;
-	width: 100% ;
-	height: auto;
+.Vt{
+	height: 18px;
 	display: inline-block;
+  float:right;
+  margin: 0px 10px 0px 0px;
+  vertical-align: middle;
+}
+.Vt:hover{
+	background-color:rgba(0,0,0,0.4);
+	border-radius:4px;
+	padding:1px;
+}
+.optc{
+  height:calc(32vh - 30px);
+  margin: 0px;
+  overflow: hidden;
+  display: flex;
+  justify-content:flex-start;
+  flex-wrap:wrap;
+  transition: all 1s;
+}
+.optc:hover{
+  overflow: auto;
+  height:calc(96vh - 30px);
+}
+
+#area{
+	z-index: -100;
 }
 
 ::-webkit-scrollbar {/*滚动条整体样式*/
